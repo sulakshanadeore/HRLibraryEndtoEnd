@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EntityLayer">
+      <HintPath>..\EntityLayer\bin\Debug\net6.0\EntityLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExceptionLib">
+      <HintPath>..\ExceptionLib\bin\Debug\net6.0\ExceptionLib.dll</HintPath>
+    </Reference>
+    <Reference Include="HelperLib">
+      <HintPath>..\HelperLib\bin\Debug\net6.0\HelperLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
