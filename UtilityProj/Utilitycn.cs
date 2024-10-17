@@ -1,30 +1,30 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace UtilityProj
 {
-    public static class Utilitycn
+    public static class DBPropertyUtil
     {
-        static Utilitycn()
-         {
-           _cn = "Data Source=.\\sqlexpress;Initial Catalog=EndToEndProj;Integrated Security=True;Trust Server Certificate=True";
-        }
-        private static string _cn=null;
-        public  static  string cnString
+        private static IConfigurationRoot _configuration;
+        static string s = null;
+        static DBPropertyUtil()
         {
-            get { return _cn; }
-            private set
-            {
-                _cn=value;  
-            }
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("D:\\AllDemos\\Hexaware\\HRLibraryEndtoEnd\\UtilityProj\\appsettings.json",
+               optional: true, reloadOnChange: true);
+            _configuration = builder.Build();
         }
-
-        public static SqlConnection ReturnCn() 
+        public static string ReturnCn(string key)
         {
-            SqlConnection cn=new SqlConnection(cnString);
-            return cn;
-        
+            
+            s = _configuration.GetConnectionString("dbCn");
+           
+            return s;
         }
-
-    }
+   }
 }
 

@@ -22,9 +22,11 @@ namespace DAOLibrary
     }
     public class EmpRepoService : IEmpServiceRepo
     {
-        public List<EmpEntity> GetAllEmps() { 
-        
-            SqlConnection cn=Utilitycn.ReturnCn();
+        public List<EmpEntity> GetAllEmps() {
+
+            string cnstr = Utilitycn.ReturnCn("dbCn");
+            SqlConnection cn = new SqlConnection(cnstr);
+            
             SqlCommand cmd = new SqlCommand("Select * from emp", cn);
             cn.Open();
             SqlDataReader dr=cmd.ExecuteReader();
@@ -53,7 +55,9 @@ namespace DAOLibrary
 
         private static bool DeleteEmpRecord(int p_empid, bool status)
         {
-            SqlConnection cn=Utilitycn.ReturnCn();
+            
+            string cnstr = Utilitycn.ReturnCn("DefaultConnection");
+            SqlConnection cn = new SqlConnection(cnstr);
             try
             {
 
@@ -95,7 +99,8 @@ namespace DAOLibrary
 
         private static EmpEntity SearchEmployeeByID(int empid)
         {
-            SqlConnection cn = Utilitycn.ReturnCn();
+           string cnstr= Utilitycn.ReturnCn("dbCn");
+            SqlConnection cn = new SqlConnection(cnstr);
             SqlCommand cmd = new SqlCommand("select * from emp where empno=" + empid, cn);
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
@@ -127,7 +132,8 @@ namespace DAOLibrary
 
         private static bool InsertEmpRecord(EmpEntity emp, out bool status)
         {
-            SqlConnection cn = Utilitycn.ReturnCn();
+            string cnstr = Utilitycn.ReturnCn("dbCn");
+            SqlConnection cn = new SqlConnection(cnstr);
             SqlCommand cmd = new SqlCommand("insert into emp values(@ename,@sal,@deptno)", cn);
             cmd.Parameters.AddWithValue("@ename", emp.Empname);
             cmd.Parameters.AddWithValue("@sal", emp.Salary);
@@ -151,7 +157,8 @@ namespace DAOLibrary
         public bool UpdateEmpData(int empid, EmpEntity emp)
         {
             bool status=false;
-            SqlConnection cn=Utilitycn.ReturnCn();
+            string cnstr = Utilitycn.ReturnCn("dbCn");
+            SqlConnection cn = new SqlConnection(cnstr);
             SqlCommand cmd = new SqlCommand("update emp set Ename=@ename,Sal=@sal,Deptno=@deptno where Empno=" + empid, cn);
             cn.Open();
             cmd.Parameters.AddWithValue("@ename", emp.Empname);
