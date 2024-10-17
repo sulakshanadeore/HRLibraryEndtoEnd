@@ -24,7 +24,7 @@ namespace DAOLibrary
     {
         public List<EmpEntity> GetAllEmps() {
 
-            string cnstr = Utilitycn.ReturnCn("dbCn");
+            string cnstr = DBPropertyUtil.ReturnCn("dbCn");
             SqlConnection cn = new SqlConnection(cnstr);
             
             SqlCommand cmd = new SqlCommand("Select * from emp", cn);
